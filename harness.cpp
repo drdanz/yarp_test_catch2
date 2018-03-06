@@ -7,7 +7,11 @@
 
 
 #define CATCH_CONFIG_RUNNER
+#if defined(USE_SYSTEM_CATCH)
 #include <catch.hpp>
+#else
+#include "catch.hpp"
+#endif
 
 #ifdef YARP2_LINUX
 # define CHECK_FOR_LEAKS
@@ -36,9 +40,11 @@ int main(int argc, char *argv[])
 
     bool verbose = 0;
 
+#if (CATCH_VERSION_MAJOR>=2)
     using namespace Catch::clara;
     auto cli = session.cli() | Opt(verbose )["-y"]["--yarp-verbose"]("Enable verbose mode");
     session.cli( cli );
+#endif
 
     int returnCode = session.applyCommandLine( argc, argv );
     if( returnCode != 0 ) {

@@ -5,7 +5,11 @@
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  */
 
+#if defined(USE_SYSTEM_CATCH)
 #include <catch.hpp>
+#else
+#include "catch.hpp"
+#endif
 
 #include <yarp/os/BinPortable.h>
 #include <yarp/os/Network.h>

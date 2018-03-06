@@ -5,14 +5,17 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(YARP REQUIRED)
 
+option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
+
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(harness_os_catch2 harness.cpp
                                  BinPortableTest.cpp
                                  BottleTest.cpp)
-target_link_libraries(harness_os_catch2 YARP::YARP_OS
-                                        YARP::YARP_init
-                                        YARP::YARP_serversql)
-
+target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
+                                                YARP::YARP_init
+                                                YARP::YARP_serversql)
+target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
 enable_testing()
 
