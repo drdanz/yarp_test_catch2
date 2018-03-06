@@ -16,5 +16,11 @@ target_link_libraries(harness_os_catch2 YARP::YARP_OS
 
 enable_testing()
 
-include(Catch)
-catch_discover_tests(harness_os_catch2)
+
+include(ParseAndAddCatchTests)
+set(PARSE_CATCH_TESTS_VERBOSE OFF CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_NO_HIDDEN_TESTS ON CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_ADD_TARGET_IN_TEST_NAME OFF CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_ADD_FIXTURE_IN_TEST_NAME ON CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_ADD_TO_CONFIGURE_DEPENDS ON CACHE INTERNAL "")
+ParseAndAddCatchTests(harness_os_catch2)
