@@ -21,6 +21,7 @@ add_executable(harness_os_catch2 harness.cpp
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
                                                 YARP::YARP_serversql
+                                                YARP::YARP_sig
                                                 ACE)
 
 target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
