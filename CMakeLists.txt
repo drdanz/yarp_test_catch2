@@ -45,7 +45,8 @@ add_executable(harness_os_impl_catch2 harness.cpp
                                       BufferedConnectionWriterTest.cpp
                                       DgramTwoWayStreamTest.cpp
                                       NameConfigTest.cpp
-                                      NameServerTest.cpp)
+                                      NameServerTest.cpp
+                                      PortCoreTest.cpp)
 
 target_link_libraries(harness_os_impl_catch2 PRIVATE YARP::YARP_OS
                                                      YARP::YARP_init
