@@ -60,7 +60,8 @@ add_executable(harness_os_impl_catch2 harness.cpp
                                       libYARP_OS/impl/NameServerTest.cpp
                                       libYARP_OS/impl/PortCommandTest.cpp
                                       libYARP_OS/impl/PortCoreTest.cpp
-                                      libYARP_OS/impl/ProtocolTest.cpp)
+                                      libYARP_OS/impl/ProtocolTest.cpp
+                                      libYARP_OS/impl/StreamConnectionReaderTest.cpp)
 
 target_link_libraries(harness_os_impl_catch2 PRIVATE YARP::YARP_OS
                                                      YARP::YARP_init
