@@ -19,28 +19,28 @@ set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
 option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/extern"
                     ${ACE_INCLUDE_DIRS})
 add_executable(harness_os_catch2 harness.cpp
-                                 BinPortableTest.cpp
-                                 BottleTest.cpp
-                                 ContactTest.cpp
-                                 ElectionTest.cpp
-                                 EventTest.cpp
-                                 LogStreamTest.cpp
-                                 LogTest.cpp
-                                 NetTypeTest.cpp
-                                 NetworkTest.cpp
-                                 NodeTest.cpp
-                                 PeriodicThreadTest.cpp
-                                 PortablePairTest.cpp
-                                 PortReaderBufferTest.cpp
-                                 PortTest.cpp
-                                 PropertyTest.cpp
-                                 PublisherTest.cpp
-                                 ResourceFinderTest.cpp
-                                 RFModuleTest.cpp
-                                 RouteTest.cpp)
+                                 libYARP_OS/BinPortableTest.cpp
+                                 libYARP_OS/BottleTest.cpp
+                                 libYARP_OS/ContactTest.cpp
+                                 libYARP_OS/ElectionTest.cpp
+                                 libYARP_OS/EventTest.cpp
+                                 libYARP_OS/LogStreamTest.cpp
+                                 libYARP_OS/LogTest.cpp
+                                 libYARP_OS/NetTypeTest.cpp
+                                 libYARP_OS/NetworkTest.cpp
+                                 libYARP_OS/NodeTest.cpp
+                                 libYARP_OS/PeriodicThreadTest.cpp
+                                 libYARP_OS/PortablePairTest.cpp
+                                 libYARP_OS/PortReaderBufferTest.cpp
+                                 libYARP_OS/PortTest.cpp
+                                 libYARP_OS/PropertyTest.cpp
+                                 libYARP_OS/PublisherTest.cpp
+                                 libYARP_OS/ResourceFinderTest.cpp
+                                 libYARP_OS/RFModuleTest.cpp
+                                 libYARP_OS/RouteTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
@@ -52,13 +52,13 @@ target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CA
 
 
 add_executable(harness_os_impl_catch2 harness.cpp
-                                      BufferedConnectionWriterTest.cpp
-                                      DgramTwoWayStreamTest.cpp
-                                      NameConfigTest.cpp
-                                      NameServerTest.cpp
-                                      PortCommandTest.cpp
-                                      PortCoreTest.cpp
-                                      ProtocolTest.cpp)
+                                      libYARP_OS/impl/BufferedConnectionWriterTest.cpp
+                                      libYARP_OS/impl/DgramTwoWayStreamTest.cpp
+                                      libYARP_OS/impl/NameConfigTest.cpp
+                                      libYARP_OS/impl/NameServerTest.cpp
+                                      libYARP_OS/impl/PortCommandTest.cpp
+                                      libYARP_OS/impl/PortCoreTest.cpp
+                                      libYARP_OS/impl/ProtocolTest.cpp)
 
 target_link_libraries(harness_os_impl_catch2 PRIVATE YARP::YARP_OS
                                                      YARP::YARP_init
@@ -69,7 +69,7 @@ target_compile_definitions(harness_os_impl_catch2 PRIVATE $<IF:$<BOOL:${USE_SYST
 
 
 add_executable(harness_math_catch2 harness.cpp
-                                   MathTest.cpp)
+                                   libYARP_math/MathTest.cpp)
 target_link_libraries(harness_math_catch2 PRIVATE YARP::YARP_OS
                                                   YARP::YARP_init
                                                   YARP::YARP_serversql
