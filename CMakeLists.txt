@@ -31,7 +31,8 @@ add_executable(harness_os_catch2 harness.cpp
                                  PeriodicThreadTest.cpp
                                  PortablePairTest.cpp
                                  PortCommandTest.cpp
-                                 PortReaderBufferTest.cpp)
+                                 PortReaderBufferTest.cpp
+                                 )
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
@@ -46,7 +47,9 @@ add_executable(harness_os_impl_catch2 harness.cpp
                                       DgramTwoWayStreamTest.cpp
                                       NameConfigTest.cpp
                                       NameServerTest.cpp
-                                      PortCoreTest.cpp)
+                                      PortCoreTest.cpp
+                                      ProtocolTest.cpp
+                                      )
 
 target_link_libraries(harness_os_impl_catch2 PRIVATE YARP::YARP_OS
                                                      YARP::YARP_init
