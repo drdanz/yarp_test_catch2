@@ -24,9 +24,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
 add_executable(harness_os_catch2 harness.cpp
                                  BinPortableTest.cpp
                                  BottleTest.cpp
-                                 BufferedConnectionWriterTest.cpp
                                  ContactTest.cpp
-                                 DgramTwoWayStreamTest.cpp
                                  ElectionTest.cpp
                                  EventTest.cpp
                                  LogStreamTest.cpp
@@ -36,22 +34,18 @@ add_executable(harness_os_catch2 harness.cpp
                                  NodeTest.cpp
                                  PeriodicThreadTest.cpp
                                  PortablePairTest.cpp
-                                 PortCommandTest.cpp
                                  PortReaderBufferTest.cpp
                                  PortTest.cpp
                                  PropertyTest.cpp
                                  PublisherTest.cpp
                                  ResourceFinderTest.cpp)
 
-                                 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
-                                                YARP::YARP_serversql
                                                 YARP::YARP_sig
                                                 YARP::YARP_dev
                                                 YARP::YARP_serversql
                                                 YARP::YARP_companion)
-
 target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
 
@@ -60,15 +54,16 @@ add_executable(harness_os_impl_catch2 harness.cpp
                                       DgramTwoWayStreamTest.cpp
                                       NameConfigTest.cpp
                                       NameServerTest.cpp
+                                      PortCommandTest.cpp
                                       PortCoreTest.cpp
-                                      ProtocolTest.cpp
-                                      )
+                                      ProtocolTest.cpp)
 
 target_link_libraries(harness_os_impl_catch2 PRIVATE YARP::YARP_OS
                                                      YARP::YARP_init
                                                      YARP::YARP_sig
                                                      YARP::YARP_serversql
                                                      ${ACE_LIBRARIES})
+target_compile_definitions(harness_os_impl_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
 
 add_executable(harness_math_catch2 harness.cpp
@@ -77,8 +72,8 @@ target_link_libraries(harness_math_catch2 PRIVATE YARP::YARP_OS
                                                   YARP::YARP_init
                                                   YARP::YARP_serversql
                                                   YARP::YARP_sig
-                                                  ${ACE_LIBRARIES}
-                                                  YARP::YARP_math)
+                                                  YARP::YARP_math
+                                                  ${ACE_LIBRARIES})
 target_compile_definitions(harness_math_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
 add_executable(harness_sig_catch2 harness.cpp
@@ -89,10 +84,10 @@ add_executable(harness_sig_catch2 harness.cpp
                                   libYARP_sig/VectorOfTest.cpp
                                   libYARP_sig/VectorTest.cpp)
 target_link_libraries(harness_sig_catch2 PRIVATE YARP::YARP_OS
-                                                  YARP::YARP_init
-                                                  YARP::YARP_serversql
-                                                  YARP::YARP_sig
-                                                  YARP::YARP_gsl)
+                                                 YARP::YARP_init
+                                                 YARP::YARP_serversql
+                                                 YARP::YARP_sig
+                                                 YARP::YARP_gsl)
 target_compile_definitions(harness_sig_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
 
@@ -106,6 +101,7 @@ set(PARSE_CATCH_TESTS_ADD_TARGET_IN_TEST_NAME OFF CACHE INTERNAL "")
 set(PARSE_CATCH_TESTS_ADD_FIXTURE_IN_TEST_NAME ON CACHE INTERNAL "")
 set(PARSE_CATCH_TESTS_ADD_TO_CONFIGURE_DEPENDS ON CACHE INTERNAL "")
 ParseAndAddCatchTests(harness_os_catch2)
+ParseAndAddCatchTests(harness_os_impl_catch2)
 ParseAndAddCatchTests(harness_math_catch2)
 ParseAndAddCatchTests(harness_sig_catch2)
 
