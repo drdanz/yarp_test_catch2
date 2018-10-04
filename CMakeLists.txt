@@ -19,7 +19,6 @@ add_executable(harness_os_catch2 harness.cpp
                                  EventTest.cpp
                                  LogStreamTest.cpp
                                  LogTest.cpp
-                                 ContactTest.cpp
                                  NameConfigTest.cpp
                                  NetTypeTest.cpp)
 
