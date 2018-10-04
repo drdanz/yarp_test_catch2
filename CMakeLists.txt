@@ -3,7 +3,7 @@ project(test_catch2)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(YARP 3.1 REQUIRED COMPONENTS OS serversql)
+find_package(YARP 3.1 REQUIRED COMPONENTS OS sig serversql)
 
 option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 
@@ -11,9 +11,11 @@ option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(harness_os_catch2 harness.cpp
                                  BinPortableTest.cpp
-                                 BottleTest.cpp)
+                                 BottleTest.cpp
+                                 BufferedConnectionWriterTest.cpp)
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
+                                                YARP::YARP_sig
                                                 YARP::YARP_serversql)
 target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
