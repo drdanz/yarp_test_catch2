@@ -42,7 +42,9 @@ add_executable(harness_os_catch2 harness.cpp
                                  libYARP_OS/RFModuleTest.cpp
                                  libYARP_OS/RouteTest.cpp
                                  libYARP_OS/SemaphoreTest.cpp
-                                 libYARP_OS/StampTest.cpp)
+                                 libYARP_OS/StampTest.cpp
+                                 libYARP_OS/StringInputStreamTest.cpp
+                                 libYARP_OS/StringOutputStreamTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
