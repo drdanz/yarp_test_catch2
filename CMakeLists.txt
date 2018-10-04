@@ -3,7 +3,7 @@ project(test_catch2)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(YARP REQUIRED)
+find_package(YARP 3.1 REQUIRED COMPONENTS OS serversql)
 
 option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 
