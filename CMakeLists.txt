@@ -29,7 +29,8 @@ add_executable(harness_os_catch2 harness.cpp
                                  NetworkTest.cpp
                                  NodeTest.cpp
                                  PeriodicThreadTest.cpp
-                                 PortablePairTest.cpp)
+                                 PortablePairTest.cpp
+                                 PortCommandTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
