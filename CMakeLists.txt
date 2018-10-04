@@ -3,14 +3,17 @@ project(test_catch2)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(YARP 3.1 REQUIRED COMPONENTS OS math sig serversql)
-
+find_package(YARP 3.1 REQUIRED COMPONENTS OS
+                                          sig
+                                          dev
+                                          math
+                                          serversql
+                                          companion)
 
 find_package(ACE REQUIRED)
 
-
-find_package(ACE REQUIRED)
-
+set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
+set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
 
 option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 
@@ -32,13 +35,16 @@ add_executable(harness_os_catch2 harness.cpp
                                  PortablePairTest.cpp
                                  PortCommandTest.cpp
                                  PortReaderBufferTest.cpp
+                                 PortTest.cpp
                                  PropertyTest.cpp
                                  PublisherTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
                                                 YARP::YARP_sig
-                                                YARP::YARP_serversql)
+                                                YARP::YARP_dev
+                                                YARP::YARP_serversql
+                                                YARP::YARP_companion)
 
 target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
