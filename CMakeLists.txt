@@ -31,7 +31,8 @@ add_executable(harness_os_catch2 harness.cpp
                                  NameServerTest.cpp
                                  NetTypeTest.cpp
                                  NetworkTest.cpp
-                                 NodeTest.cpp)
+                                 NodeTest.cpp
+                                 PeriodicThreadTest.cpp)
 
                                  
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
