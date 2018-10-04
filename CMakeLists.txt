@@ -8,7 +8,8 @@ find_package(YARP 3.1 REQUIRED COMPONENTS OS
                                           dev
                                           math
                                           serversql
-                                          companion)
+                                          companion
+                                          gsl)
 
 find_package(ACE REQUIRED)
 
@@ -23,7 +24,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}
 add_executable(harness_os_catch2 harness.cpp
                                  BinPortableTest.cpp
                                  BottleTest.cpp
+                                 BufferedConnectionWriterTest.cpp
                                  ContactTest.cpp
+                                 DgramTwoWayStreamTest.cpp
                                  ElectionTest.cpp
                                  EventTest.cpp
                                  LogStreamTest.cpp
@@ -40,8 +43,10 @@ add_executable(harness_os_catch2 harness.cpp
                                  PublisherTest.cpp
                                  ResourceFinderTest.cpp)
 
+                                 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
+                                                YARP::YARP_serversql
                                                 YARP::YARP_sig
                                                 YARP::YARP_dev
                                                 YARP::YARP_serversql
@@ -68,15 +73,27 @@ target_link_libraries(harness_os_impl_catch2 PRIVATE YARP::YARP_OS
 
 add_executable(harness_math_catch2 harness.cpp
                                    MathTest.cpp)
-
 target_link_libraries(harness_math_catch2 PRIVATE YARP::YARP_OS
                                                   YARP::YARP_init
                                                   YARP::YARP_serversql
                                                   YARP::YARP_sig
-                                                  YARP::YARP_math
-                                                  ${ACE_LIBRARIES})
-
+                                                  ${ACE_LIBRARIES}
+                                                  YARP::YARP_math)
 target_compile_definitions(harness_math_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
+
+add_executable(harness_sig_catch2 harness.cpp
+                                  libYARP_sig/ImageTest.cpp
+                                  libYARP_sig/MatrixTest.cpp
+                                  libYARP_sig/PointCloudTest.cpp
+                                  libYARP_sig/SoundTest.cpp
+                                  libYARP_sig/VectorOfTest.cpp
+                                  libYARP_sig/VectorTest.cpp)
+target_link_libraries(harness_sig_catch2 PRIVATE YARP::YARP_OS
+                                                  YARP::YARP_init
+                                                  YARP::YARP_serversql
+                                                  YARP::YARP_sig
+                                                  YARP::YARP_gsl)
+target_compile_definitions(harness_sig_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
 
 enable_testing()
@@ -89,5 +106,6 @@ set(PARSE_CATCH_TESTS_ADD_TARGET_IN_TEST_NAME OFF CACHE INTERNAL "")
 set(PARSE_CATCH_TESTS_ADD_FIXTURE_IN_TEST_NAME ON CACHE INTERNAL "")
 set(PARSE_CATCH_TESTS_ADD_TO_CONFIGURE_DEPENDS ON CACHE INTERNAL "")
 ParseAndAddCatchTests(harness_os_catch2)
-ParseAndAddCatchTests(harness_os_impl_catch2)
 ParseAndAddCatchTests(harness_math_catch2)
+ParseAndAddCatchTests(harness_sig_catch2)
+
