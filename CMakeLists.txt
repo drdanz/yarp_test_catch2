@@ -20,6 +20,7 @@ add_executable(harness_os_catch2 harness.cpp
                                  LogStreamTest.cpp
                                  LogTest.cpp
                                  NameConfigTest.cpp
+                                 NameServerTest.cpp)
                                  NetTypeTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
