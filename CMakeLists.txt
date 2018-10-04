@@ -5,10 +5,14 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(YARP 3.1 REQUIRED COMPONENTS OS sig serversql)
 
+find_package(ACE REQUIRED)
+
+
 option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}
+                    ${ACE_INCLUDE_DIRS})
 add_executable(harness_os_catch2 harness.cpp
                                  BinPortableTest.cpp
                                  BottleTest.cpp
@@ -28,7 +32,7 @@ target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_sig
                                                 YARP::YARP_serversql
                                                 YARP::YARP_sig
-                                                ACE)
+                                                ${ACE_LIBRARIES})
 
 target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
