@@ -14,15 +14,6 @@
 #include "catch.hpp"
 #endif
 
-#ifdef YARP2_LINUX
-# define CHECK_FOR_LEAKS
-#endif
-
-#ifdef CHECK_FOR_LEAKS
-# include <mcheck.h>
-#endif
-
-
 #include <yarp/os/Network.h>
 #include <yarp/os/Property.h>
 #include <yarp/os/NameStore.h>
@@ -33,10 +24,6 @@ using namespace yarp::os;
 
 int main(int argc, char *argv[])
 {
-#ifdef CHECK_FOR_LEAKS
-    mtrace();
-#endif
-
     Catch::Session session;
 
     bool verbose = 0;

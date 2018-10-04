@@ -12,14 +12,15 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(harness_os_catch2 harness.cpp
                                  BinPortableTest.cpp
                                  BottleTest.cpp
-                                 DgramTwoWayStreamTest.cpp
                                  BufferedConnectionWriterTest.cpp
+                                 ContactTest.cpp
+                                 DgramTwoWayStreamTest.cpp
                                  ElectionTest.cpp
-                                 EventTest.cpp
-                                 ContactTest.cpp)
-                                 
+                                 EventTest.cpp)
+
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
+                                                YARP::YARP_sig
                                                 YARP::YARP_serversql
                                                 YARP::YARP_sig
                                                 ACE)
