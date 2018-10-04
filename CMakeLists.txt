@@ -16,7 +16,9 @@ add_executable(harness_os_catch2 harness.cpp
                                  ContactTest.cpp
                                  DgramTwoWayStreamTest.cpp
                                  ElectionTest.cpp
-                                 EventTest.cpp)
+                                 EventTest.cpp
+                                 LogStreamTest.cpp
+                                 LogTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
