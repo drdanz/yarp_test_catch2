@@ -37,7 +37,8 @@ add_executable(harness_os_catch2 harness.cpp
                                  PortReaderBufferTest.cpp
                                  PortTest.cpp
                                  PropertyTest.cpp
-                                 PublisherTest.cpp)
+                                 PublisherTest.cpp
+                                 ResourceFinderTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
