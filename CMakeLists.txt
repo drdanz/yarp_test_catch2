@@ -46,7 +46,8 @@ add_executable(harness_os_catch2 harness.cpp
                                  libYARP_OS/StringInputStreamTest.cpp
                                  libYARP_OS/StringOutputStreamTest.cpp
                                  libYARP_OS/SystemInfoTest.cpp
-                                 libYARP_OS/TerminatorTest.cpp)
+                                 libYARP_OS/TerminatorTest.cpp
+                                 libYARP_OS/ThreadTest.cpp)
 
 target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_init
