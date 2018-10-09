@@ -139,3 +139,40 @@ target_compile_definitions(harness_math_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_
 
 ParseAndAddCatchTests(harness_math_catch2)
 
+
+################################################################################
+# dev
+
+add_executable(harness_dev_catch2 harness.cpp
+                                  libYARP_dev/AnalogWrapperTest.cpp
+                                  libYARP_dev/ControlBoardRemapperTest.cpp
+                                  libYARP_dev/FrameTransformClientTest.cpp
+                                  libYARP_dev/MapGrid2DTest.cpp
+                                  libYARP_dev/MultipleAnalogSensorsInterfacesTest
+                                  libYARP_dev/PolyDriverTest.cpp
+                                  libYARP_dev/robotDescriptionTest.cpp
+                                  libYARP_dev/TestFrameGrabberTest.cpp)
+
+target_link_libraries(harness_dev_catch2 PRIVATE YARP::YARP_OS
+                                                 YARP::YARP_init
+                                                 YARP::YARP_serversql
+                                                 YARP::YARP_sig
+                                                 YARP::YARP_math
+                                                 YARP::YARP_dev)
+
+target_compile_definitions(harness_dev_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
+
+ParseAndAddCatchTests(harness_dev_catch2)
+
+
+################################################################################
+# devices
+
+add_executable(harness_devices harness_devices.cpp)
+
+target_link_libraries(harness_devices PRIVATE YARP::YARP_OS
+                                              YARP::YARP_init
+                                              YARP::YARP_dev)
+
+
+
