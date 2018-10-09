@@ -18,9 +18,22 @@ set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
 
 option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 
+enable_testing()
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/extern"
-                    ${ACE_INCLUDE_DIRS})
+
+include(ParseAndAddCatchTests)
+set(PARSE_CATCH_TESTS_VERBOSE OFF CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_NO_HIDDEN_TESTS ON CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_ADD_TARGET_IN_TEST_NAME OFF CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_ADD_FIXTURE_IN_TEST_NAME ON CACHE INTERNAL "")
+set(PARSE_CATCH_TESTS_ADD_TO_CONFIGURE_DEPENDS ON CACHE INTERNAL "")
+
+
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/extern")
+
+
+################################################################################
+# OS
 add_executable(harness_os_catch2 harness.cpp
                                  libYARP_OS/BinPortableTest.cpp
                                  libYARP_OS/BottleTest.cpp
@@ -58,8 +71,14 @@ target_link_libraries(harness_os_catch2 PRIVATE YARP::YARP_OS
                                                 YARP::YARP_dev
                                                 YARP::YARP_serversql
                                                 YARP::YARP_companion)
+
 target_compile_definitions(harness_os_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
+ParseAndAddCatchTests(harness_os_catch2)
+
+
+################################################################################
+# OS/impl
 
 add_executable(harness_os_impl_catch2 harness.cpp
                                       libYARP_OS/impl/BufferedConnectionWriterTest.cpp
@@ -71,23 +90,21 @@ add_executable(harness_os_impl_catch2 harness.cpp
                                       libYARP_OS/impl/ProtocolTest.cpp
                                       libYARP_OS/impl/StreamConnectionReaderTest.cpp)
 
+target_include_directories(harness_os_impl_catch2 PRIVATE ${ACE_INCLUDE_DIRS})
+
 target_link_libraries(harness_os_impl_catch2 PRIVATE YARP::YARP_OS
                                                      YARP::YARP_init
                                                      YARP::YARP_sig
                                                      YARP::YARP_serversql
                                                      ${ACE_LIBRARIES})
+
 target_compile_definitions(harness_os_impl_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
+ParseAndAddCatchTests(harness_os_impl_catch2)
 
-add_executable(harness_math_catch2 harness.cpp
-                                   libYARP_math/MathTest.cpp)
-target_link_libraries(harness_math_catch2 PRIVATE YARP::YARP_OS
-                                                  YARP::YARP_init
-                                                  YARP::YARP_serversql
-                                                  YARP::YARP_sig
-                                                  YARP::YARP_math
-                                                  ${ACE_LIBRARIES})
-target_compile_definitions(harness_math_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
+
+################################################################################
+# sig
 
 add_executable(harness_sig_catch2 harness.cpp
                                   libYARP_sig/ImageTest.cpp
@@ -101,20 +118,24 @@ target_link_libraries(harness_sig_catch2 PRIVATE YARP::YARP_OS
                                                  YARP::YARP_serversql
                                                  YARP::YARP_sig
                                                  YARP::YARP_gsl)
+
 target_compile_definitions(harness_sig_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
 
-
-enable_testing()
-
-
-include(ParseAndAddCatchTests)
-set(PARSE_CATCH_TESTS_VERBOSE OFF CACHE INTERNAL "")
-set(PARSE_CATCH_TESTS_NO_HIDDEN_TESTS ON CACHE INTERNAL "")
-set(PARSE_CATCH_TESTS_ADD_TARGET_IN_TEST_NAME OFF CACHE INTERNAL "")
-set(PARSE_CATCH_TESTS_ADD_FIXTURE_IN_TEST_NAME ON CACHE INTERNAL "")
-set(PARSE_CATCH_TESTS_ADD_TO_CONFIGURE_DEPENDS ON CACHE INTERNAL "")
-ParseAndAddCatchTests(harness_os_catch2)
-ParseAndAddCatchTests(harness_os_impl_catch2)
-ParseAndAddCatchTests(harness_math_catch2)
 ParseAndAddCatchTests(harness_sig_catch2)
+
+
+################################################################################
+# math
+
+add_executable(harness_math_catch2 harness.cpp
+                                   libYARP_math/MathTest.cpp)
+target_link_libraries(harness_math_catch2 PRIVATE YARP::YARP_OS
+                                                  YARP::YARP_init
+                                                  YARP::YARP_serversql
+                                                  YARP::YARP_sig
+                                                  YARP::YARP_math)
+
+target_compile_definitions(harness_math_catch2 PRIVATE $<IF:$<BOOL:${USE_SYSTEM_CATCH}>,USE_SYSTEM_CATCH,>)
+
+ParseAndAddCatchTests(harness_math_catch2)
 

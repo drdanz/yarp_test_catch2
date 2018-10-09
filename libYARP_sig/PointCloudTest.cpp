@@ -6,26 +6,19 @@
  * BSD-3-Clause license. See the accompanying LICENSE file for details.
  */
 
+#include <yarp/sig/PointCloud.h>
 
-/**
- *
- * Tests for point cloud type
- *
- */
+#include <yarp/os/BufferedPort.h>
+#include <yarp/os/Port.h>
+#include <yarp/os/Time.h>
+#include <yarp/os/Bottle.h>
+#include <yarp/os/Network.h>
 
 #if defined(USE_SYSTEM_CATCH)
 #include <catch.hpp>
 #else
 #include "catch.hpp"
 #endif
-
-#include <yarp/os/Port.h>
-#include <yarp/os/Time.h>
-#include <yarp/os/Bottle.h>
-#include <yarp/os/Network.h>
-#include <yarp/os/NetType.h>
-#include <yarp/sig/PointCloud.h>
-#include <yarp/os/PortReaderBuffer.h>
 
 using namespace yarp::sig;
 using namespace yarp::os;
@@ -34,8 +27,9 @@ float acceptedDiff = 1e-6f;
 
 TEST_CASE("sig::PointCloudTest", "[yarp::sig]") {
 
+    Network::setLocalMode(true);
+
     SECTION("check read/write mismatch.") {
-        Network::setLocalMode(true);
         INFO( "Checking DataXYZRGBA sending - Type match");
         BufferedPort< PointCloud<DataXYZRGBA> > outPort;
         Port inPort;
@@ -90,7 +84,6 @@ TEST_CASE("sig::PointCloudTest", "[yarp::sig]") {
     }
 
     SECTION("check read/write mismatch 1.") {
-        Network::setLocalMode(true);
         INFO("Testing the case in which we receive a structure bigger than the one we expect");
         BufferedPort< PointCloud<DataXYZRGBA> > outPort;
         Port inPort;
@@ -139,8 +132,6 @@ TEST_CASE("sig::PointCloudTest", "[yarp::sig]") {
     }
 
     SECTION("check read/write mismatch 2.") {
-
-        Network::setLocalMode(true);
         INFO("Testing the case in which we receive a structure smaller than the one we expect");
         BufferedPort< PointCloud<DataXYZNormal> > outPort;
         Port inPort;
@@ -912,4 +903,6 @@ TEST_CASE("sig::PointCloudTest", "[yarp::sig]") {
          }
 
     }
+
+    Network::setLocalMode(false);
 }
