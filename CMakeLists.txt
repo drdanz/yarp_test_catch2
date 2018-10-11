@@ -148,7 +148,7 @@ add_executable(harness_dev_catch2 harness.cpp
                                   libYARP_dev/ControlBoardRemapperTest.cpp
                                   libYARP_dev/FrameTransformClientTest.cpp
                                   libYARP_dev/MapGrid2DTest.cpp
-                                  libYARP_dev/MultipleAnalogSensorsInterfacesTest
+                                  libYARP_dev/MultipleAnalogSensorsInterfacesTest.cpp
                                   libYARP_dev/PolyDriverTest.cpp
                                   libYARP_dev/robotDescriptionTest.cpp
                                   libYARP_dev/TestFrameGrabberTest.cpp)
