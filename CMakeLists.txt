@@ -15,6 +15,7 @@ find_package(ACE REQUIRED)
 
 set(CMAKE_C_FLAGS ${YARP_C_FLAGS})
 set(CMAKE_CXX_FLAGS ${YARP_CXX_FLAGS})
+add_definitions("-DBUILDING_YARP")
 
 option(USE_SYSTEM_CATCH "Use system catch.hpp" OFF)
 
